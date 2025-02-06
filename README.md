@@ -14,3 +14,4 @@ Chatting Application
 
 ## Discussion Questions:
 1. What does the bootstrap `display-4` class do?
+The display-4 class makes the heading it is assigned to appear as a level 4 heading instead of a level 1 heading from the h1 tag
