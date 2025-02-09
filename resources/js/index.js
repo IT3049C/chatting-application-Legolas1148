@@ -63,9 +63,10 @@ function sendMessage(username, messageText)
   };
   const messageRequest = new Request(`https://it3049c-chat.fly.dev/messages`, {
     method: `POST`,
-    body: JSON.stringify(message),
+    body: JSON.stringify(message)
   });
 
+  chatBox.appendChild(formatMessage(message));
   fetch(`https://it3049c-chat.fly.dev/messages`, messageRequest);
 }
 
