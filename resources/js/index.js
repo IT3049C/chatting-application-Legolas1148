@@ -61,8 +61,12 @@ function sendMessage(username, messageText)
     text: messageText,
     timestamp: (new Date().getTime())
   };
+  const messageRequest = new Request(`https://it3049c-chat.fly.dev/messages`, {
+    method: `POST`,
+    body: JSON.stringify(message),
+  });
 
-  chatBox.appendChild(formatMessage(message));
+  fetch(`https://it3049c-chat.fly.dev/messages`, messageRequest);
 }
 
 sendButton.addEventListener(`click`, function (e){
