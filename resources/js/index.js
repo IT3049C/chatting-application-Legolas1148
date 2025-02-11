@@ -15,7 +15,7 @@ function formatMessage(message)
     divClass = `yours`;
   }
 
-  let messageTimestamp = (new Date(message.timestamp));
+  let messageTimestamp = new Date(message.timestamp);
   let messageTime = `${messageTimestamp.getHours()}:` + String(messageTimestamp.getMinutes()).padStart(2, `0`);
 
   let HTMLMmessage = document.createElement(`div`);
@@ -59,15 +59,28 @@ function sendMessage(username, messageText)
   let message = {
     sender: username,
     text: messageText,
-    timestamp: (new Date().getTime())
+    timestamp: new Date().toISOString()
   };
-  const messageRequest = new Request(`https://it3049c-chat.fly.dev/messages`, {
-    method: `POST`,
-    body: JSON.stringify(message)
-  });
 
   chatBox.appendChild(formatMessage(message));
-  fetch(`https://it3049c-chat.fly.dev/messages`, messageRequest);
+
+  console.log(JSON.stringify(message));
+
+  // const messageRequest = new Request(`https://it3049c-chat.fly.dev/messages`, {
+  //   method: `POST`,
+  //   headers: {
+  //     contentType: `application/json`
+  //   },
+  //   body: JSON.stringify(message)
+  // });
+
+  fetch(`https://it3049c-chat.fly.dev/messages`, {
+    method: `POST`,
+    headers: {
+      contentType: `application/json`
+    },
+    body: JSON.stringify(message)
+  });
 }
 
 sendButton.addEventListener(`click`, function (e){
