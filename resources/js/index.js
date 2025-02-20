@@ -38,12 +38,14 @@ function formatMessage(message)
 async function fetchMessages()
 {
   let messageArray = await fetch(`https://it3049c-chat.fly.dev/messages`);
-  return messageArray;
+  return messageArray.json();
 }
 
-function updateMessagesInChatBox()
+async function updateMessagesInChatBox()
 {
-  let messageArray = fetchMessages();
+  console.log(`test`);
+  let messageArray = await fetchMessages();
+  console.log(messageArray);
 
   chatBox.innerHTML = ``;
 
@@ -66,21 +68,15 @@ function sendMessage(username, messageText)
 
   console.log(JSON.stringify(message));
 
-  // const messageRequest = new Request(`https://it3049c-chat.fly.dev/messages`, {
-  //   method: `POST`,
-  //   headers: {
-  //     contentType: `application/json`
-  //   },
-  //   body: JSON.stringify(message)
-  // });
-
-  fetch(`https://it3049c-chat.fly.dev/messages`, {
+  const messageRequest = new Request(`https://it3049c-chat.fly.dev/messages`, {
     method: `POST`,
     headers: {
-      contentType: `application/json`
+      'Content-Type': `application/json`
     },
     body: JSON.stringify(message)
   });
+
+  fetch(messageRequest);
 }
 
 sendButton.addEventListener(`click`, function (e){
